@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">茌平公交</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="share">分享</string>
+    <string name="about">关于</string>
+    <string name="settings">设置</string>
+    <string name="suggest">意见和建议</string>
+    <string name="line_search">线路查询</string>
+    <string name="station_search">站点查询</string>
+    <string name="transfer_search">换乘查询</string>
+    <string name="line_favorite">线路收藏</string>
+    <string name="recent_search">查询记录</string>
+    <string name="navigation">导航</string>
+    <string name="line1">K1路</string>
+    <string name="line2">K2路</string>
+    <string name="line3">K3路</string>
+    <string name="line4">K4路</string>
+    <string name="line5">K5路</string>
+    <string name="line6">K6路</string>
+    <string name="hint_bus">为了让茌平的天更蓝，水更绿，请让我们一起努力！</string>
+</resources>
