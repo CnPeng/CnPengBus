@@ -3,7 +3,6 @@ package com.cnpeng.bus
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -16,9 +15,12 @@ import kotlinx.android.synthetic.main.content_main.*
 
 /**
  *  CnPeng 180131
- *  确定基色
- *  线路选择：1、右上角按钮    2、侧滑界面中条目   3、底部悬浮按钮
  *
+ *  确定基色:亮天蓝色
+ *  线路选择：1、右上角按钮    2、侧滑界面中条目   3、底部悬浮按钮
+ *  双击返回退出APP
+ *  底部切换线路的按钮允许用户动态拖拽定义在左侧或者右侧，点击选线路，长按拖拽
+ *  右上角改成收藏线路功能
  *
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -28,26 +30,50 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolbar)
+        //fab.setOnClickListener { view ->
+        //    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        //            .setAction("Action", null)
+        //            .show()
+        //}
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null)
-                    .show()
-        }
+        initDrawerLayout()
+        val lastestLineNum = initLineNum()
+        initWebViewData(lastestLineNum)
+    }
 
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
+    /**
+     * 初始化线路数据。
+     * 进入APP时初始化该数据--
+     *      --进入APP时检测之前是否使用过，如果之前查询过，展示之前查询的页面。未使用过默认展示K1
+     */
+    private fun initLineNum(): Int {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO 此处需要从SP中查询数据，判断之前是否有展示过相关内容--》用数据库查询？
+        return 1
+    }
 
-        nav_view.setNavigationItemSelectedListener(this)
+    /**
+     * 填充webView主体内容
+     */
+    private fun initWebViewData(lineNum: Int) {
+        webView.clearCache(true)
 
-        var url = """http://chiping.weixin4bus.com:4001/LineServer/WeiXin!getStation.action?lineCode=1&lineName=1路"""
+        val url = """http://chiping.weixin4bus.com:4001/LineServer/WeiXin!getStation.action?lineCode=${lineNum}&lineName=${lineNum}路"""
         webView.loadUrl(url)
-
 
         val webSettings: WebSettings = webView.settings;
         webSettings.javaScriptEnabled = true    //不启用不展示小汽车
+    }
+
+    /**
+     *初始化侧拉界面
+     */
+    private fun initDrawerLayout() {
+        setSupportActionBar(toolbar)
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+        nav_view.setNavigationItemSelectedListener(this)
     }
 
     override fun onBackPressed() {
@@ -92,9 +118,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_recent_search -> {
 
             }
-// R.id.nav_navigation -> {
-//
-// }
             R.id.nav_about -> {
 
             }
