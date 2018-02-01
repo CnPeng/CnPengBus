@@ -25,8 +25,9 @@ import kotlinx.android.synthetic.main.content_main.*
  *
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    private var mRecentLineSpHelper: RecentLineSpHelper = RecentLineSpHelper(this)
+    //var mRecentLineSpHelper: RecentLineSpHelper?=null
+    //声明全局变量时，前面需要加 lateinit 关键字，表示延时初始化。否则，只能声明为上面那种可空的
+    private lateinit var mRecentLineSpHelper: RecentLineSpHelper
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //            .show()
         //}
 
+        mRecentLineSpHelper = RecentLineSpHelper(this)
+
         initDrawerLayout()
         val latestLineNum = initLineNum()
         initWebViewData(latestLineNum)
@@ -50,6 +53,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      *      --进入APP时检测之前是否使用过，如果之前查询过，展示之前查询的页面。未使用过默认展示K1
      */
     private fun initLineNum(): String {
+        //return if (mRecentLineSpHelper != null) (mRecentLineSpHelper!!.getLatestLine()) else "1"
         return mRecentLineSpHelper.getLatestLine()
     }
 
