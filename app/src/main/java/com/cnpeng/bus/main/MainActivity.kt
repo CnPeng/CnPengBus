@@ -19,11 +19,12 @@ import kotlinx.android.synthetic.main.content_main.*
 /**
  *  CnPeng 180131
  *
- *  确定基色:亮天蓝色
- *  线路选择：1、右上角按钮    2、侧滑界面中条目   3、底部悬浮按钮
- *  双击返回退出APP
- *  底部切换线路的按钮允许用户动态拖拽定义在左侧或者右侧，点击选线路，长按拖拽
- *  右上角改成收藏线路功能
+ *  1、确定基色:亮天蓝色
+ *  2、线路选择：1、右上角按钮    2、侧滑界面中条目   3、底部悬浮按钮
+ *  3、双击返回退出APP
+ *  4、底部切换线路的按钮允许用户动态拖拽定义在左侧或者右侧，点击选线路，长按拖拽
+ *  5、右上角改成收藏线路功能
+ *  6、不要在主线程加载网络页面
  *
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     /**
-     * 填充webView主体内容
+     * 填充webView主体内容.
      */
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebViewData(lineNum: String) {
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val webSettings: WebSettings = webView.settings
         webSettings.javaScriptEnabled = true    //不启用不展示小汽车
         webSettings.builtInZoomControls = true  //启用缩放--如果该页面做了移动端适配，该参数不生效
-        webSettings.displayZoomControls = false   //执行缩放操作时，不展示右下角的放大镜
+        webSettings.displayZoomControls = false   //执行缩放操作时，不展示右下角的放大镜 
     }
 
     /**
@@ -143,10 +144,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     /**
      * 切换线路
+     * 如果要切换的与当前正在展示的不一致，才执行切换操作
      */
     private fun changeLineNum(lineNum: String) {
-        mRecentLineSpHelper.saveLatestLine(lineNum)
-        initWebViewData(lineNum)
+        val latestLineNum = mRecentLineSpHelper.getLatestLine()
+        if (lineNum != latestLineNum) {
+            mRecentLineSpHelper.saveLatestLine(lineNum)
+            initWebViewData(lineNum)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
