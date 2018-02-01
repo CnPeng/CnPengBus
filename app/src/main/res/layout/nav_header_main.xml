@@ -17,7 +17,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="2dp"
-        android:background="@drawable/shape_round_corner5_whitebg"
+        android:background="@drawable/shape_rect_corner5_whitebg"
         android:contentDescription="@string/content_nav_logo"
         app:srcCompat="@mipmap/logo"/>
     <!--app:srcCompat="@mipmap/ic_launcher_round"/>-->

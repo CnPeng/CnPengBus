@@ -1,11 +1,7 @@
 package com.cnpeng.bus.main
 
 import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.res.Configuration
+import android.content.*
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
@@ -22,9 +18,9 @@ import com.cnpeng.bus.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import android.content.res.Configuration.SCREENLAYOUT_SIZE_LARGE
-import android.content.res.Configuration.SCREENLAYOUT_SIZE_MASK
-
+import android.support.v7.app.AlertDialog
+import android.view.View
+import android.view.animation.ScaleAnimation
 
 
 /**
@@ -59,9 +55,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mRecentLineSpHelper = RecentLineSpHelper(this)
 
         initDrawerLayout()
-        val latestLineNum = initLineNum()
+        val latestLineNum = getLatestLineNum()
         initWebViewData(latestLineNum)
         initBroadCastReceiver()
+        initShowLineTv()
+    }
+
+    /**
+     * 初始化右下角选择线路的按钮--点击展示线路列表
+     */
+    private fun initShowLineTv() {
+        val lineNums= arrayOf("1","2","3","4","5","6")
+       tv_showLines.setOnClickListener(View.OnClickListener { view ->
+           //执行缩放动画
+          val anim=ScaleAnimation(0.8f,1.0f,0.8f,1.0f,0.5f,0.5f)
+           anim.duration=600
+           tv_showLines.startAnimation(anim)
+
+
+           //展示线路列表弹窗
+           val lineListDialog=AlertDialog.Builder(this)
+           lineListDialog.setSingleChoiceItems(lineNums,0, DialogInterface.OnClickListener {
+               dialogInterface, index ->
+               //切换线路，因为索引从0 开始，所以此处+1
+               changeLineNum((index+1).toString())
+           })
+           lineListDialog.setTitle("请选择线路")
+           lineListDialog.show()
+       })
+
     }
 
     /**
@@ -79,7 +101,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * 进入APP时初始化该数据--
      *      --进入APP时检测之前是否使用过，如果之前查询过，展示之前查询的页面。未使用过默认展示K1
      */
-    private fun initLineNum(): String {
+    private fun getLatestLineNum(): String {
         //return if (mRecentLineSpHelper != null) (mRecentLineSpHelper!!.getLatestLine()) else "1"
         return mRecentLineSpHelper.getLatestLine()
     }
@@ -229,7 +251,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
 
                 if (null != networkInfo && networkInfo.isConnected && networkInfo.isAvailable) {
-                    val latestLineNum = initLineNum()
+                    val latestLineNum = getLatestLineNum()
                     initWebViewData(latestLineNum)
                 } else {
                     Toast.makeText(this@MainActivity, "网络断开了吆。。。", LENGTH_SHORT).show()
