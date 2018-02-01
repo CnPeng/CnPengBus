@@ -6,10 +6,23 @@
     <!--android:title="@string/line1"-->
     <!--app:showAsAction="never"/>-->
 
-    <item android:title="@string/line1"/>
-    <item android:title="@string/line2"/>
-    <item android:title="@string/line3"/>
-    <item android:title="@string/line4"/>
-    <item android:title="@string/line5"/>
-    <item android:title="@string/line6"/>
+    <item
+        android:id="@+id/item_line1"
+        android:title="@string/line1"/>
+    
+    <item android:id="@+id/item_line2"
+          android:title="@string/line2"
+    />
+    <item android:id="@+id/item_line3"
+          android:title="@string/line3"
+    />
+    <item android:id="@+id/item_line4"
+          android:title="@string/line4"
+    />
+    <item android:id="@+id/item_line5"
+          android:title="@string/line5"
+    />
+    <item android:id="@+id/item_line6"
+          android:title="@string/line6"
+    />
 </menu>

@@ -1,4 +1,4 @@
-package com.cnpeng.bus
+package com.cnpeng.bus.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebSettings
+import com.cnpeng.bus.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -25,6 +26,8 @@ import kotlinx.android.synthetic.main.content_main.*
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private var mRecentLineSpHelper: RecentLineSpHelper = RecentLineSpHelper(this)
+
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +40,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //}
 
         initDrawerLayout()
-        val lastestLineNum = initLineNum()
-        initWebViewData(lastestLineNum)
+        val latestLineNum = initLineNum()
+        initWebViewData(latestLineNum)
     }
 
     /**
@@ -46,23 +49,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * 进入APP时初始化该数据--
      *      --进入APP时检测之前是否使用过，如果之前查询过，展示之前查询的页面。未使用过默认展示K1
      */
-    private fun initLineNum(): Int {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        //TODO 此处需要从SP中查询数据，判断之前是否有展示过相关内容--》用数据库查询？
-        return 1
+    private fun initLineNum(): String {
+        return mRecentLineSpHelper.getLatestLine()
     }
 
     /**
      * 填充webView主体内容
      */
-    private fun initWebViewData(lineNum: Int) {
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun initWebViewData(lineNum: String) {
         webView.clearCache(true)
 
-        val url = """http://chiping.weixin4bus.com:4001/LineServer/WeiXin!getStation.action?lineCode=${lineNum}&lineName=${lineNum}路"""
+        val url = """http://chiping.weixin4bus.com:4001/LineServer/WeiXin!getStation.action?lineCode=$lineNum&lineName=${lineNum}路"""
         webView.loadUrl(url)
 
-        val webSettings: WebSettings = webView.settings;
+        val webSettings: WebSettings = webView.settings
         webSettings.javaScriptEnabled = true    //不启用不展示小汽车
+        webSettings.builtInZoomControls = true
     }
 
     /**
@@ -95,9 +98,40 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-//            R.id.action_settings -> return true
+            R.id.item_line1 -> {
+                changeLineNum("1")
+                return true
+            }
+            R.id.item_line2 -> {
+                changeLineNum("2")
+                return true
+            }
+            R.id.item_line3 -> {
+                changeLineNum("3")
+                return true
+            }
+            R.id.item_line4 -> {
+                changeLineNum("4")
+                return true
+            }
+            R.id.item_line5 -> {
+                changeLineNum("5")
+                return true
+            }
+            R.id.item_line6 -> {
+                changeLineNum("6")
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    /**
+     * 切换线路
+     */
+    private fun changeLineNum(lineNum: String) {
+        mRecentLineSpHelper.saveLatestLine(lineNum)
+        initWebViewData(lineNum)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
