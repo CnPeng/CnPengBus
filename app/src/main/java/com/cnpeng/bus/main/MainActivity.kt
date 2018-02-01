@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
@@ -21,6 +22,10 @@ import com.cnpeng.bus.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import android.content.res.Configuration.SCREENLAYOUT_SIZE_LARGE
+import android.content.res.Configuration.SCREENLAYOUT_SIZE_MASK
+
+
 
 /**
  *  CnPeng 180131
@@ -84,7 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebViewData(lineNum: String) {
-        webView.clearCache(true)
+        //webView.clearCache(true)
 
         val url = """http://chiping.weixin4bus.com:4001/LineServer/WeiXin!getStation.action?lineCode=$lineNum&lineName=${lineNum}路"""
         webView.loadUrl(url)
@@ -123,7 +128,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
+        //menu.getItem(0).setShowAsAction(SHOW_AS_ACTION_WITH_TEXT)
         return true
     }
 
@@ -156,10 +162,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 changeLineNum("6")
                 return true
             }
+//            R.id.item_changeLine -> {
+//                invalidateOptionsMenu()
+//                openOptionsMenu()
+//                return true
+//            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
-
+    
     /**
      * 切换线路
      * 如果要切换的与当前正在展示的不一致，才执行切换操作
@@ -204,6 +215,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
->
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--<item android:id="@+id/action_settings"-->
     <!--android:orderInCategory="100"-->
     <!--android:title="@string/line1"-->
     <!--app:showAsAction="never"/>-->
-
+    <!--<item-->
+    <!--android:icon="@android:drawable/ic_menu_sort_by_size"-->
+    <!--android:title="@string/changeLine"-->
+    <!--app:showAsAction="always|withText">-->
+    <!--<menu>-->
+    <!--<group android:checkableBehavior="single">-->
+    <item
+        android:id="@+id/item_changeLine"
+        android:checkable="true"
+        android:enabled="true"
+        android:title="@string/changeLine"
+        app:showAsAction="always|withText"/>
     <item
         android:id="@+id/item_line1"
         android:title="@string/line1"/>
-    
+
     <item android:id="@+id/item_line2"
           android:title="@string/line2"
     />
@@ -25,4 +37,8 @@
     <item android:id="@+id/item_line6"
           android:title="@string/line6"
     />
+    <!--</group>-->
+    <!--</menu>-->
+    <!--</item>-->
+
 </menu>
