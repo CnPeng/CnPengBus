@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebSettings
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import com.cnpeng.bus.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //var mRecentLineSpHelper: RecentLineSpHelper?=null
     //声明全局变量时，前面需要加 lateinit 关键字，表示延时初始化。否则，只能声明为上面那种可空的
     private lateinit var mRecentLineSpHelper: RecentLineSpHelper
+    private var firstClickTime: Long = 0
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +73,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val webSettings: WebSettings = webView.settings
         webSettings.javaScriptEnabled = true    //不启用不展示小汽车
         webSettings.builtInZoomControls = true  //启用缩放--如果该页面做了移动端适配，该参数不生效
-        webSettings.displayZoomControls=false   //执行缩放操作时，不展示右下角的放大镜
+        webSettings.displayZoomControls = false   //执行缩放操作时，不展示右下角的放大镜
     }
 
     /**
@@ -88,7 +91,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            //双击退出APP
+            val secondClikTime: Long = System.currentTimeMillis()
+            if (secondClikTime - firstClickTime > 2000) {
+                Toast.makeText(this, "再按一次退出程序", LENGTH_SHORT).show()
+                firstClickTime = secondClikTime
+            } else {
+                super.onBackPressed()
+            }
         }
     }
 
