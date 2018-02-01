@@ -1,6 +1,12 @@
 package com.cnpeng.bus.main
 
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -31,6 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     //var mRecentLineSpHelper: RecentLineSpHelper?=null
     //声明全局变量时，前面需要加 lateinit 关键字，表示延时初始化。否则，只能声明为上面那种可空的
     private lateinit var mRecentLineSpHelper: RecentLineSpHelper
+    private lateinit var netWorkChangeReceiver: NetWorkChangeReceiver
     private var firstClickTime: Long = 0
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -49,6 +56,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         initDrawerLayout()
         val latestLineNum = initLineNum()
         initWebViewData(latestLineNum)
+        initBroadCastReceiver()
+    }
+
+    /**
+     * 初始化广播接收器
+     */
+    fun initBroadCastReceiver() {
+        val intentFilter = IntentFilter()
+        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
+        netWorkChangeReceiver = NetWorkChangeReceiver()
+        registerReceiver(netWorkChangeReceiver, intentFilter)
     }
 
     /**
@@ -185,5 +203,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(netWorkChangeReceiver)
+    }
+
+    inner class NetWorkChangeReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (null != context) {
+                val connectivityManager: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
+
+                if (null != networkInfo && networkInfo.isConnected && networkInfo.isAvailable) {
+                    val latestLineNum = initLineNum()
+                    initWebViewData(latestLineNum)
+                } else {
+                    Toast.makeText(this@MainActivity, "网络断开了吆。。。", LENGTH_SHORT).show()
+                }
+            }
+        }
+
     }
 }
