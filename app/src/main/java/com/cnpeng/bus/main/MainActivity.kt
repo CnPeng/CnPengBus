@@ -69,7 +69,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val webSettings: WebSettings = webView.settings
         webSettings.javaScriptEnabled = true    //不启用不展示小汽车
-        webSettings.builtInZoomControls = true
+        webSettings.builtInZoomControls = true  //启用缩放--如果该页面做了移动端适配，该参数不生效
+        webSettings.displayZoomControls=false   //执行缩放操作时，不展示右下角的放大镜
     }
 
     /**
