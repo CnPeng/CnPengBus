@@ -34,6 +34,8 @@ import kotlinx.android.synthetic.main.content_main.*
  *  4、底部切换线路的按钮允许用户动态拖拽定义在左侧或者右侧，点击选线路，长按拖拽
  *  5、右上角改成收藏线路功能（暂未添加）
  *  6、进入页面就先检查一次是否有网络
+ *  
+ *  TODO dialog弹窗中的默认选中，需要与用户之前选中的线路保持同步
  *
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
