@@ -50,8 +50,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:textSize="14sp"
         android:text="@string/use_recommend"
-        tools:text="本软件由CnPeng团队开发，为您提供茌平公交的实时线路信息。\n\n声明:\n 1、本软件使用完全免费，使用过程中产生的网络流量由网络运营商收取。\n 2、本软件在运行过程中，不会收集任何用户信息。"/>
+        tools:text="本软件由CnPeng团队开发，为您提供茌平公交的实时线路信息。\n\n\n声明:\n 1、本软件使用完全免费，使用过程中产生的网络流量由网络运营商收取。\n 2、本软件在运行过程中，不会收集任何用户信息。"/>
 
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
