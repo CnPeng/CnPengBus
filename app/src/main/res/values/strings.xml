@@ -24,4 +24,5 @@
     <string name="hint_bus">为了让茌平的天更蓝，水更绿，请让我们一起努力！</string>
     <string name="content_nav_logo">这是该APP的Logo，一个蓝色背景，一个白色的小汽车</string>
     <string name="changeLine">选择线路</string>
+    <string name="line_list">线路\n列表</string>
 </resources>

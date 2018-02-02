@@ -2,10 +2,9 @@
 <resources>
     <!--色值对照表，参考该网址 http://www.5tu.cn/colors/yansedaimabiao.html-->
     <color name="c_00bfff">#00BFFF</color>
-    <!--<color name="c_00bff">#00BFFF</color>-->
+    <color name="colorAccent">#00BFFF</color>
     <color name="c_87cefa">#87cefa</color>
     <color name="c_87ceeb">#87ceeb</color>
     <color name="c_white">#fff</color>
-    <color name="colorAccent">#FF4081</color>
-    
+
 </resources>
