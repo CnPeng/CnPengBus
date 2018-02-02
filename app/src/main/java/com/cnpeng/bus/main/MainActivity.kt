@@ -19,6 +19,7 @@ import android.webkit.WebSettings
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import com.cnpeng.bus.R
+import com.cnpeng.bus.spHelpers.RecentLineSpHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -32,6 +33,7 @@ import kotlinx.android.synthetic.main.content_main.*
  *  3、双击返回退出APP
  *  4、底部切换线路的按钮允许用户动态拖拽定义在左侧或者右侧，点击选线路，长按拖拽
  *  5、右上角改成收藏线路功能（暂未添加）
+ *  6、进入页面就先检查一次是否有网络
  *
  */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -74,7 +76,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             //展示线路列表弹窗
             val lineListDialog = AlertDialog.Builder(this)
-            lineListDialog.setSingleChoiceItems(lineNums, 0, { dialogInterface, index ->
+            lineListDialog.setSingleChoiceItems(lineNums, 0, { _, index ->
                 //切换线路，因为索引从0 开始，所以此处+1
                 changeLineNum((index + 1).toString())
             })
@@ -210,19 +212,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 // Handle the camera action
             }
             R.id.nav_station_search -> {
-
+                Toast.makeText(this, "暂未开放，敬请期待", LENGTH_SHORT).show()
             }
             R.id.nav_transfer_search -> {
-
+                Toast.makeText(this, "暂未开放，敬请期待", LENGTH_SHORT).show()
             }
             R.id.nav_line_favorite -> {
-
+                Toast.makeText(this, "暂未开放，敬请期待", LENGTH_SHORT).show()
             }
             R.id.nav_recent_search -> {
-
+                Toast.makeText(this, "暂未开放，敬请期待", LENGTH_SHORT).show()
             }
             R.id.nav_about -> {
-
+                intent = Intent(this, AboutAppActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_share -> {
 

@@ -6,7 +6,6 @@
 
     <string name="action_settings">Settings</string>
     <string name="share">分享</string>
-    <string name="about">关于</string>
     <string name="settings">设置</string>
     <string name="suggest">意见和建议</string>
     <string name="line_search">线路查询</string>
@@ -25,4 +24,7 @@
     <string name="content_nav_logo">这是该APP的Logo，一个蓝色背景，一个白色的小汽车</string>
     <string name="changeLine">选择线路</string>
     <string name="line_list">线路\n列表</string>
+    <string name="about">关于</string>
+    <string name="copy_right_info">CnPeng \nCopyright © 2010–2018 \nCnPeng technology Team</string>
+    <string name="use_recommend">本软件由CnPeng团队开发，为您提供茌平公交的实时线路信息。\n\n声明:\n 1、本软件使用完全免费，使用过程中产生的网络流量由网络运营商收取。\n 2、本软件在运行过程中，不会收集任何用户信息。 </string>
 </resources>
