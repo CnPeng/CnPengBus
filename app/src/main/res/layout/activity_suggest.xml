@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/main_00bfff">
+
+        <ImageView
+            android:id="@+id/iv_back_suggest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingEnd="10dp"
+            android:paddingStart="5dp"
+            android:src="@mipmap/nav_back_white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/suggest"
+            android:textColor="@color/c_white"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+    <!--<ScrollView android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/responsePath"
+        android:textSize="16sp"
+        tools:text="您可以通过如下方式反馈相关意见和建议：\n\n 1、邮箱：CnPeng@163.com \n\n 2、微信：893612134 \n\n 3、微信公众号：CnPeng"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:contentDescription="@string/ivContentDesc_weinxinPub"
+        android:src="@mipmap/weixinpub"/>
+    <!--<TextView -->
+    <!--android:layout_width="match_parent" -->
+    <!--android:layout_height="wrap_content"/>-->
+
+    <!--</LinearLayout>-->
+    <!--</ScrollView>-->
+
+</LinearLayout>

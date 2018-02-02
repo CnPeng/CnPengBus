@@ -228,10 +228,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
             R.id.nav_share -> {
-
+                //TODO 此处集成友盟分享
             }
             R.id.nav_suggestion -> {
-
+                val intent = Intent(this, SuggestActivity::class.java)
+                startActivity(intent)
             }
         }
 

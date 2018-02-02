@@ -26,7 +26,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".main.AboutAppActivity"/>
+        <activity android:name=".main.AboutAppActivity"
+                  android:screenOrientation="portrait"/>
+
+        <activity android:name=".main.SuggestActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

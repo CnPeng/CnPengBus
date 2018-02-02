@@ -24,6 +24,6 @@ class AboutAppActivity : AppCompatActivity() {
 
     private fun initView() {
         tv_appAndVersionName.text = CommonUtils.getAppNameAndVersionName(this)
-        iv_back.setOnClickListener({ finish() })
+        iv_back_about.setOnClickListener({ finish() })
     }
 }
